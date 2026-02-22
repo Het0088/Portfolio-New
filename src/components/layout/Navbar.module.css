@@ -1,0 +1,83 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-lg);
+  transition: transform 0.4s var(--ease-smooth);
+}
+
+.hidden {
+  transform: translateY(-100%);
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.logoAccent {
+  color: var(--color-accent);
+}
+
+.links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.link {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-accent);
+  transition: width 0.3s var(--ease-smooth);
+}
+
+.link:hover,
+.linkActive {
+  color: var(--color-text);
+}
+
+.linkActive::after {
+  width: 100%;
+}
+
+.progressBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--color-accent);
+  transition: none;
+}
+
+@media (max-width: 767px) {
+  .nav {
+    padding: 0 var(--space-md);
+  }
+
+  .links {
+    display: none;
+  }
+}

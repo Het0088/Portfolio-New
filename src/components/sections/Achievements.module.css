@@ -1,0 +1,293 @@
+.achievements {
+  position: relative;
+  padding: var(--space-xl) var(--space-lg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  perspective: 1200px;
+}
+
+/* ---- Header area ---- */
+.headerArea {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.label {
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--color-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  margin-bottom: var(--space-xs);
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--color-muted);
+  margin-bottom: var(--space-md);
+}
+
+/* ---- Stats row ---- */
+.statsRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.statValue {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+}
+
+.statDivider {
+  width: 1px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ---- Grid ---- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1100px;
+  width: 100%;
+}
+
+/* ---- Card ---- */
+.certCard {
+  position: relative;
+  border-radius: 18px;
+  background: rgba(16, 16, 28, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  transition:
+    transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 0.3s,
+    box-shadow 0.4s;
+}
+
+.certCard:hover {
+  transform: translateY(-6px) scale(1.015);
+  border-color: color-mix(in srgb, var(--cert-color) 30%, transparent);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.35),
+    0 0 0 1px color-mix(in srgb, var(--cert-color) 15%, transparent);
+}
+
+/* Glow behind card on hover */
+.cardGlow {
+  position: absolute;
+  top: -40%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    color-mix(in srgb, var(--cert-color) 12%, transparent),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.certCard:hover .cardGlow {
+  opacity: 1;
+}
+
+/* Top accent gradient strip */
+.accentStrip {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--cert-color),
+    color-mix(in srgb, var(--cert-color) 40%, #6c63ff)
+  );
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+
+.certCard:hover .accentStrip {
+  opacity: 1;
+}
+
+/* Card content */
+.cardBody {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-md) var(--space-md) var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  min-height: 140px;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+}
+
+/* Issuer badge with icon */
+.issuerBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px 4px 6px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.issuerIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.issuerName {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cert-color);
+}
+
+.date {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-muted);
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.certTitle {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: auto;
+  padding-bottom: var(--space-sm);
+}
+
+/* Footer: credential + verified */
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-xs);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.credentialId {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--color-muted);
+  opacity: 0.45;
+  letter-spacing: 0.04em;
+}
+
+.verifiedTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #50fa7b;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.certCard:hover .verifiedTag {
+  opacity: 1;
+}
+
+.verifiedIcon {
+  width: 14px;
+  height: 14px;
+}
+
+/* ---- Section number watermark ---- */
+.sectionNumber {
+  position: absolute;
+  right: 4vw;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-heading);
+  font-size: clamp(10rem, 25vw, 22rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: var(--color-text);
+  opacity: 0.02;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .achievements {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .statsRow {
+    gap: var(--space-sm);
+  }
+
+  .statValue {
+    font-size: 1.5rem;
+  }
+
+  .cardBody {
+    min-height: auto;
+  }
+
+  .sectionNumber {
+    display: none;
+  }
+}

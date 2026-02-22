@@ -1,0 +1,174 @@
+.about {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-lg);
+  align-items: center;
+}
+
+.sectionLabel {
+  grid-column: 1 / -1;
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--color-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.textColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.textBlock {
+  will-change: transform, opacity;
+}
+
+.heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: var(--space-sm);
+}
+
+.headingAccent {
+  color: var(--color-accent);
+}
+
+.bio {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+.counters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.counter {
+  text-align: center;
+  padding: var(--space-sm);
+  border-radius: 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.counterValue {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 800;
+  color: var(--color-accent);
+  display: block;
+  font-variant-numeric: tabular-nums;
+}
+
+.counterLabel {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+
+.visualColumn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  will-change: transform;
+}
+
+/* Portrait frame with glow */
+.portraitFrame {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--color-surface), rgba(108, 99, 255, 0.06));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(108, 99, 255, 0.08);
+}
+
+.portraitGlow {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(108, 99, 255, 0.15) 0%,
+    rgba(0, 212, 255, 0.06) 60%,
+    transparent 80%
+  );
+  filter: blur(30px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.portraitImg {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.sectionNumber {
+  position: absolute;
+  right: 4vw;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-heading);
+  font-size: clamp(10rem, 25vw, 22rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: var(--color-text);
+  opacity: 0.02;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+@media (max-width: 767px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+    padding: var(--space-md);
+  }
+
+  .visualColumn {
+    min-height: 250px;
+    order: -1;
+  }
+
+  .counters {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .counterValue {
+    font-size: 1.5rem;
+  }
+
+  .sectionNumber {
+    display: none;
+  }
+}

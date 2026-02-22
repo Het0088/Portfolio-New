@@ -1,0 +1,577 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  /* No background — Three.js canvas behind handles depth */
+}
+
+/* ===== BACKGROUND SECTION NUMBER ===== */
+.bgNumber {
+  position: absolute;
+  right: 4vw;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-heading);
+  font-size: clamp(18rem, 38vw, 36rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: var(--color-text);
+  opacity: 0.022;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  will-change: transform, opacity;
+}
+
+/* ===== CORNER TAG (top-right) ===== */
+.cornerTag {
+  position: absolute;
+  top: calc(var(--nav-height) + 1.5rem);
+  right: clamp(1.5rem, 4vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--color-muted);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.35;
+  z-index: 2;
+  will-change: opacity;
+}
+
+/* ===== MAIN CONTENT — bottom-left ===== */
+.content {
+  position: absolute;
+  bottom: 14vh;
+  left: clamp(1.5rem, 7vw, 6rem);
+  z-index: 2;
+  max-width: 60vw;
+  will-change: transform, opacity;
+}
+
+/* Role meta line */
+.meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.1vw, 0.78rem);
+  color: var(--color-muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  will-change: transform, opacity;
+}
+
+.metaDot {
+  color: var(--color-accent);
+  opacity: 0.55;
+}
+
+/* Name */
+.nameLine {
+  overflow: hidden;
+  line-height: 0.9;
+  display: block;
+}
+
+.name {
+  font-family: var(--font-heading);
+  font-size: clamp(5.5rem, 13.5vw, 13rem);
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  color: var(--color-text);
+  margin-bottom: 2.4rem;
+  will-change: transform;
+}
+
+.nameInner {
+  display: block;
+  will-change: transform;
+}
+
+/* ===== ACTIONS ROW ===== */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  flex-wrap: wrap;
+  will-change: transform, opacity;
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0.85rem 1.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(108, 99, 255, 0.45);
+  background: rgba(108, 99, 255, 0.07);
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition:
+    background 0.35s var(--ease-smooth),
+    border-color 0.35s var(--ease-smooth),
+    transform 0.25s var(--ease-smooth),
+    box-shadow 0.35s var(--ease-smooth);
+  will-change: transform;
+}
+
+.ctaBtn::after {
+  content: '→';
+  display: inline-block;
+  transition: transform 0.3s var(--ease-smooth);
+}
+
+.ctaBtn:hover {
+  background: rgba(108, 99, 255, 0.16);
+  border-color: rgba(108, 99, 255, 0.8);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(108, 99, 255, 0.18);
+}
+
+.ctaBtn:hover::after {
+  transform: translateX(5px);
+}
+
+/* Available for work badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--color-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.badgeDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #50fa7b;
+  flex-shrink: 0;
+  animation: dotGlow 2.8s ease-in-out infinite;
+}
+
+@keyframes dotGlow {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(80, 250, 123, 0.8), 0 0 20px rgba(80, 250, 123, 0.25);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 4px rgba(80, 250, 123, 0.3);
+    opacity: 0.7;
+  }
+}
+
+/* ===== BOTTOM BAR ===== */
+.bottomBar {
+  position: absolute;
+  bottom: clamp(1.2rem, 3.5vh, 2.5rem);
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+  will-change: opacity;
+}
+
+.location {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--color-muted);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.38;
+  margin-bottom: 0.8rem;
+}
+
+.scrollIndicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.scrollText {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.28em;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  opacity: 0.4;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 52px;
+  background: linear-gradient(to bottom, var(--color-accent), transparent);
+  transform-origin: top;
+  will-change: transform, opacity;
+}
+
+/* ===== RIGHT-SIDE VISUAL ELEMENTS ===== */
+
+/* Wrapper — scroll-away fades this, entry animates children individually */
+.rightVisuals {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+/* Rotating text ring */
+.textRing {
+  position: absolute;
+  right: 8vw;
+  top: 30%;
+  width: 280px;
+  height: 280px;
+  z-index: 2;
+  opacity: 0.12;
+  pointer-events: none;
+  animation: spinRing 40s linear infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes spinRing {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.textRing svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ringText {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  fill: var(--color-text);
+}
+
+.ringCircle {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 0.5;
+  stroke-dasharray: 4 6;
+  opacity: 0.3;
+}
+
+/* Code snippet glass card */
+.codeCard {
+  position: absolute;
+  right: 6vw;
+  top: 56%;
+  width: 260px;
+  z-index: 2;
+  padding: 1.2rem 1.4rem;
+  border-radius: 14px;
+  background: rgba(10, 10, 20, 0.5);
+  backdrop-filter: blur(12px) saturate(1.1);
+  -webkit-backdrop-filter: blur(12px) saturate(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.codeCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.codeCardDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.codeCardDot:nth-child(1) {
+  background: #ff5f57;
+}
+
+.codeCardDot:nth-child(2) {
+  background: #ffbd2e;
+}
+
+.codeCardDot:nth-child(3) {
+  background: #28c840;
+}
+
+.codeLine {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1.7;
+  color: var(--color-muted);
+  white-space: pre;
+}
+
+.codeKeyword {
+  color: #c678dd;
+}
+
+.codeVar {
+  color: var(--color-text);
+}
+
+.codeKey {
+  color: var(--color-accent);
+}
+
+.codeString {
+  color: var(--color-accent-secondary);
+}
+
+.codeBracket {
+  color: #8888aa;
+}
+
+.codePunc {
+  color: #666;
+}
+
+/* Decorative accents */
+.accents {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.accentLine {
+  position: absolute;
+  right: 22vw;
+  top: 24%;
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-accent), transparent);
+  opacity: 0.15;
+}
+
+.accentCross {
+  position: absolute;
+  right: 4vw;
+  top: 48%;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  opacity: 0.15;
+  line-height: 1;
+}
+
+.accentDots {
+  position: absolute;
+  right: 18vw;
+  top: 72%;
+  display: flex;
+  gap: 6px;
+}
+
+.accentDot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  opacity: 0.2;
+}
+
+.accentAngle {
+  position: absolute;
+  right: 26vw;
+  top: 62%;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-accent);
+  opacity: 0.1;
+  letter-spacing: 0.2em;
+}
+
+/* ===== FLOATING TECH CHIPS ===== */
+.techChips {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.techChip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.15),
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -0.5px 0 rgba(255, 255, 255, 0.04);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.chipDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px currentColor;
+}
+
+/* Individual chip positions + float speeds */
+.chipFloat1 {
+  right: 20vw;
+  top: 16%;
+  animation: floatChip 3.2s ease-in-out infinite;
+}
+
+.chipFloat2 {
+  right: 2vw;
+  top: 22%;
+  animation: floatChip 3.8s ease-in-out 0.5s infinite;
+}
+
+.chipFloat3 {
+  right: 26vw;
+  top: 38%;
+  animation: floatChip 3s ease-in-out 0.2s infinite;
+}
+
+.chipFloat4 {
+  right: 14vw;
+  top: 46%;
+  animation: floatChip 4s ease-in-out 0.8s infinite;
+}
+
+.chipFloat5 {
+  right: 28vw;
+  top: 64%;
+  animation: floatChip 3.4s ease-in-out 0.1s infinite;
+}
+
+.chipFloat6 {
+  right: 4vw;
+  top: 74%;
+  animation: floatChip 3.6s ease-in-out 0.6s infinite;
+}
+
+.chipFloat7 {
+  right: 18vw;
+  top: 84%;
+  animation: floatChip 3.1s ease-in-out 0.3s infinite;
+}
+
+@keyframes floatChip {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .content {
+    max-width: 75vw;
+  }
+
+  .textRing {
+    width: 200px;
+    height: 200px;
+    right: 4vw;
+    top: 28%;
+  }
+
+  .codeCard {
+    width: 220px;
+    right: 3vw;
+  }
+}
+
+@media (max-width: 767px) {
+  .bgNumber {
+    display: none;
+  }
+
+  .cornerTag {
+    display: none;
+  }
+
+  .rightVisuals {
+    display: none;
+  }
+
+  .content {
+    bottom: 15vh;
+    left: var(--space-md);
+    max-width: 92vw;
+  }
+
+  .name {
+    font-size: clamp(4rem, 18vw, 6rem);
+  }
+
+  .meta {
+    font-size: 0.6rem;
+    gap: 0.35rem;
+  }
+
+  .bottomBar {
+    left: 0;
+    right: 0;
+  }
+
+  .actions {
+    gap: var(--space-sm);
+  }
+
+  .ctaBtn {
+    font-size: 0.78rem;
+    padding: 0.75rem 1.5rem;
+  }
+}

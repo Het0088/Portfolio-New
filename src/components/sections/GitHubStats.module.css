@@ -1,0 +1,204 @@
+.github {
+  position: relative;
+  padding: var(--space-xl) var(--space-lg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.label {
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--color-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.statsRow {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.statBox {
+  padding: var(--space-md) var(--space-lg);
+  border-radius: 16px;
+  background: rgba(20, 20, 31, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+  min-width: 140px;
+  transition: transform 0.3s var(--ease-smooth), border-color 0.3s;
+}
+
+.statBox:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
+}
+
+.statValue {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.statLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-muted);
+}
+
+.repoHeading {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+  color: var(--color-muted);
+}
+
+.repoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 1000px;
+  width: 100%;
+  margin-bottom: var(--space-md);
+}
+
+.repoCard {
+  padding: var(--space-md);
+  border-radius: 14px;
+  background: rgba(20, 20, 31, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: transform 0.3s var(--ease-smooth), border-color 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.repoCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+.repoName {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-bottom: var(--space-xs);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.repoDesc {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+  flex: 1;
+  margin-bottom: var(--space-sm);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.repoMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.7rem;
+  color: var(--color-muted);
+}
+
+.repoLang {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.langDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.repoStars {
+  color: #ffd93d;
+}
+
+.viewAll {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  transition: gap 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.viewAll:hover {
+  gap: 10px;
+}
+
+.sectionNumber {
+  position: absolute;
+  right: 4vw;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-heading);
+  font-size: clamp(10rem, 25vw, 22rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: var(--color-text);
+  opacity: 0.02;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+@media (max-width: 767px) {
+  .github {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .statsRow {
+    gap: var(--space-sm);
+  }
+
+  .statBox {
+    min-width: 100px;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .statValue {
+    font-size: 1.5rem;
+  }
+
+  .repoGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionNumber {
+    display: none;
+  }
+}
