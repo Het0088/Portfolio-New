@@ -110,7 +110,11 @@ export default function Projects() {
       <div className={styles.inner} ref={innerRef}>
         {projects.map((project, i) => (
           <div className={styles.panel} key={project.id} style={{ '--card-accent': project.color }}>
-            <span className={styles.watermarkNum}>{pad(i + 1)}</span>
+            <div className={styles.panelLeft}>
+              <span className={styles.bigNumber}>{pad(i + 1)}</span>
+              <span className={styles.categoryLabel}>{project.category}</span>
+              <div className={styles.accentLine} style={{ background: project.color }} />
+            </div>
 
             <div
               className={styles.card}
