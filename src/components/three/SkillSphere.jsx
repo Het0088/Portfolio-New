@@ -5,11 +5,7 @@ import { scrollState } from '../../hooks/useScrollStore';
 import { allSkills } from '../../data/skills';
 import * as THREE from 'three';
 
-/* palette — matches the hero wave grid */
 const purple = '#6c63ff';
-const cyan = '#00d4ff';
-
-/* readable white with a subtle blue tint */
 const textColor = '#e0e8ff';
 
 export default function SkillSphere() {
@@ -43,6 +39,10 @@ export default function SkillSphere() {
 
     // Visibility based on skills section scroll
     const p = scrollState.skillsProgress;
+
+    // Hide entirely when not in skills section
+    groupRef.current.visible = p > 0.01;
+
     const opacity = Math.min(1, p * 4) * (1 - Math.max(0, (p - 0.8) * 5));
     groupRef.current.traverse((child) => {
       if (child.material) {
@@ -73,7 +73,7 @@ export default function SkillSphere() {
           </Text>
         </Billboard>
       ))}
-      {/* Inner wireframe sphere — purple */}
+      {/* Single wireframe sphere */}
       <mesh>
         <icosahedronGeometry args={[2.5, 2]} />
         <meshBasicMaterial
@@ -81,17 +81,6 @@ export default function SkillSphere() {
           wireframe
           transparent
           opacity={0.04}
-          depthWrite={false}
-        />
-      </mesh>
-      {/* Outer wireframe sphere — cyan, slightly larger */}
-      <mesh>
-        <icosahedronGeometry args={[2.65, 2]} />
-        <meshBasicMaterial
-          color={cyan}
-          wireframe
-          transparent
-          opacity={0.025}
           depthWrite={false}
         />
       </mesh>

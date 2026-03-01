@@ -41,7 +41,7 @@ export default function GitHubStats() {
           });
         }
       })
-      .catch(() => {});
+      .catch(() => { });
 
     // Fetch top repos sorted by updated
     fetch(
@@ -61,54 +61,56 @@ export default function GitHubStats() {
           );
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   useGSAP(() => {
     const heading = sectionRef.current.querySelector(`.${styles.heading}`);
     const statCards = gsap.utils.toArray(`.${styles.statBox}`);
     const repoCards = gsap.utils.toArray(`.${styles.repoCard}`);
+    const repoGrid = sectionRef.current.querySelector(`.${styles.repoGrid}`);
 
-    gsap.from(heading, {
-      y: 40,
-      opacity: 0,
-      duration: 0.8,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: heading,
-        start: 'top 85%',
-        toggleActions: 'play none none reverse',
-      },
-    });
-
-    statCards.forEach((card, i) => {
-      gsap.from(card, {
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-        delay: i * 0.1,
-        ease: 'power3.out',
+    gsap.fromTo(heading,
+      { y: 40, opacity: 0 },
+      {
+        y: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
         scrollTrigger: {
-          trigger: card,
+          trigger: sectionRef.current,
           start: 'top 90%',
           toggleActions: 'play none none reverse',
+          invalidateOnRefresh: true,
         },
-      });
+      }
+    );
+
+    statCards.forEach((card, i) => {
+      gsap.fromTo(card,
+        { y: 30, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 0.6, delay: i * 0.1, ease: 'power3.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse',
+            invalidateOnRefresh: true,
+          },
+        }
+      );
     });
 
     repoCards.forEach((card, i) => {
-      gsap.from(card, {
-        y: 40,
-        opacity: 0,
-        duration: 0.6,
-        delay: i * 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: sectionRef.current.querySelector(`.${styles.repoGrid}`),
-          start: 'top 85%',
-          toggleActions: 'play none none reverse',
-        },
-      });
+      gsap.fromTo(card,
+        { y: 40, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 0.6, delay: i * 0.1, ease: 'power3.out',
+          scrollTrigger: {
+            trigger: repoGrid || sectionRef.current,
+            start: 'top 90%',
+            toggleActions: 'play none none reverse',
+            invalidateOnRefresh: true,
+          },
+        }
+      );
     });
   }, { scope: sectionRef });
 
@@ -124,7 +126,7 @@ export default function GitHubStats() {
 
   return (
     <section className={styles.github} ref={sectionRef} id="github">
-      <div className={styles.sectionNumber} aria-hidden="true">08</div>
+      <div className={styles.sectionNumber} aria-hidden="true">07</div>
       <p className={styles.label}>Open Source</p>
       <h2 className={styles.heading}>GitHub Activity</h2>
 

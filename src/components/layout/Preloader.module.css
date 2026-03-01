@@ -1,53 +1,91 @@
 .preloader {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   background: var(--color-bg);
   z-index: 100;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   pointer-events: all;
+  clip-path: inset(0 0 0 0);
 }
 
-.monogram {
-  font-family: var(--font-heading);
-  font-size: 3rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  color: var(--color-accent);
-  margin-bottom: var(--space-md);
-  opacity: 0;
-}
-
-.counterWrapper {
+.content {
   display: flex;
-  align-items: baseline;
-  gap: 2px;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.ringWrap {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 8px;
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+.ringSvg {
+  width: 100%;
+  height: 100%;
+}
+
+.name {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  display: flex;
+  overflow: hidden;
+}
+
+.nameChar {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(100%);
+  background: linear-gradient(135deg, #fff, var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tagline {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.bottomArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
 }
 
 .counter {
   font-family: var(--font-mono);
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   color: var(--color-muted);
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
 }
 
 .bar {
-  width: 200px;
-  height: 1px;
-  background: var(--color-surface-light);
-  margin-top: var(--space-sm);
+  width: 180px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
   overflow: hidden;
-  border-radius: 1px;
 }
 
 .barFill {
-  width: 0%;
+  width: 100%;
   height: 100%;
-  background: var(--color-accent);
-  border-radius: 1px;
+  background: linear-gradient(90deg, var(--color-accent), #00d4ff);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
 }

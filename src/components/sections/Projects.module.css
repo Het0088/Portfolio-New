@@ -21,7 +21,6 @@
   z-index: 3;
 }
 
-/* Progress counter: 01 / 06 */
 .progress {
   position: absolute;
   top: var(--space-lg);
@@ -38,178 +37,36 @@
   font-weight: 600;
 }
 
-/* ===== PANEL ===== */
 .panel {
   width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-lg);
+  padding: var(--space-xl) clamp(40px, 8vw, 140px);
   flex-shrink: 0;
   position: relative;
-  overflow: hidden;
 }
 
-/* Giant watermark number behind each panel */
-.watermark {
+.watermarkNum {
   position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   font-family: var(--font-heading);
-  font-size: clamp(15rem, 30vw, 25rem);
+  font-size: clamp(14rem, 28vw, 24rem);
   font-weight: 900;
   line-height: 1;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
-  pointer-events: none;
-  user-select: none;
-  right: 5%;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 0;
-}
-
-/* Dot grid background pattern */
-.gridBg {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.035) 1px,
-    transparent 1px
-  );
-  background-size: 50px 50px;
-  pointer-events: none;
-  z-index: 0;
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 100%);
-}
-
-/* Small refined gradient orbs (replace the ugly single blob) */
-.gradientOrb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.03);
   pointer-events: none;
   z-index: 0;
 }
 
-.gradientOrb:first-of-type {
-  width: 300px;
-  height: 300px;
-  top: 15%;
-  left: 10%;
-}
-
-.gradientOrb:last-of-type {
-  width: 250px;
-  height: 250px;
-  bottom: 10%;
-  right: 15%;
-}
-
-/* Horizontal scan line that sweeps on entrance */
-.scanLine {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--card-accent, var(--color-accent)) 20%,
-    var(--card-accent, var(--color-accent)) 80%,
-    transparent 100%
-  );
-  opacity: 0;
-  pointer-events: none;
-  z-index: 1;
-  top: 50%;
-  box-shadow: 0 0 15px 2px var(--card-accent, var(--color-accent));
-}
-
-/* Thin structural horizontal rails */
-.horizRail {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.03) 15%,
-    rgba(255, 255, 255, 0.03) 85%,
-    transparent 100%
-  );
-  pointer-events: none;
-  z-index: 0;
-}
-
-.horizRail:nth-child(1) {
-  top: 20%;
-}
-
-.horizRail:nth-child(2) {
-  top: 80%;
-}
-
-/* Decorative corner marks */
-.cornerMarks {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Top-left corner cross */
-.cornerMarks::before {
-  content: '';
-  position: absolute;
-  top: calc(var(--space-lg) + 30px);
-  left: var(--space-lg);
-  width: 12px;
-  height: 12px;
-  border-top: 1px solid var(--card-accent, var(--color-accent));
-  border-left: 1px solid var(--card-accent, var(--color-accent));
-  opacity: 0.12;
-}
-
-/* Bottom-right corner cross */
-.cornerMarks::after {
-  content: '';
-  position: absolute;
-  bottom: calc(var(--space-lg) + 30px);
-  right: var(--space-lg);
-  width: 12px;
-  height: 12px;
-  border-bottom: 1px solid var(--card-accent, var(--color-accent));
-  border-right: 1px solid var(--card-accent, var(--color-accent));
-  opacity: 0.12;
-}
-
-/* Vertical accent line on left */
-.vertLine {
-  position: absolute;
-  top: 25%;
-  left: calc(var(--space-lg) + 6px);
-  width: 1px;
-  height: 0;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    var(--card-accent, var(--color-accent)),
-    transparent
-  );
-  opacity: 0.1;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* ===== CARD ===== */
 .card {
-  max-width: 580px;
   width: 100%;
-  padding: var(--space-lg);
+  max-width: 720px;
+  padding: clamp(32px, 3.5vw, 48px);
   border-radius: 24px;
   background: rgba(20, 20, 31, 0.7);
   backdrop-filter: blur(20px);
@@ -223,35 +80,22 @@
   transition: box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
-/* Animated gradient border on top */
-.card::before {
-  content: '';
+.cardAccent {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--card-accent, var(--color-accent)),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, var(--card-accent, var(--color-accent)), transparent);
   opacity: 0.7;
 }
 
-/* Cursor spotlight effect */
-.card::after {
-  content: '';
+.cardSpotlight {
   position: absolute;
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    var(--card-accent, var(--color-accent)) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(circle, var(--card-accent, var(--color-accent)) 0%, transparent 70%);
   opacity: 0;
   pointer-events: none;
   transform: translate(-50%, -50%);
@@ -261,7 +105,7 @@
   left: var(--mouse-x, 50%);
 }
 
-.card:hover::after {
+.card:hover .cardSpotlight {
   opacity: 0.04;
 }
 
@@ -272,47 +116,24 @@
   border-color: rgba(255, 255, 255, 0.1);
 }
 
-/* ===== CARD CONTENT ===== */
-.cardHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--space-md);
-}
-
-.cardNumber {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--color-muted);
-  letter-spacing: 0.1em;
-}
-
 .cardCategory {
   font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  padding: 0.2rem 0.6rem;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--color-muted);
-}
-
-.cardTitle {
-  font-family: var(--font-heading);
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
-  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: var(--card-accent, var(--color-accent));
   margin-bottom: var(--space-xs);
-  line-height: 1.05;
   position: relative;
   z-index: 1;
 }
 
-.cardDivider {
-  width: 40px;
-  height: 2px;
-  border-radius: 1px;
-  margin: var(--space-sm) 0;
-  opacity: 0.6;
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  margin-bottom: var(--space-xs);
+  line-height: 1.1;
+  position: relative;
+  z-index: 1;
 }
 
 .cardDescription {
@@ -350,7 +171,6 @@
 .cardFooter {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   position: relative;
   z-index: 1;
 }
@@ -377,25 +197,6 @@
   transform: translateX(4px);
 }
 
-/* Dot pattern decoration in card */
-.dotPattern {
-  position: absolute;
-  bottom: var(--space-md);
-  right: var(--space-md);
-  display: grid;
-  grid-template-columns: repeat(3, 4px);
-  gap: 6px;
-  opacity: 0.15;
-  z-index: 0;
-}
-
-.dot {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-}
-
-/* ===== MOBILE ===== */
 @media (max-width: 767px) {
   .projects {
     height: auto !important;
@@ -410,37 +211,15 @@
   .panel {
     width: 100%;
     height: auto;
-    min-height: auto;
     padding: var(--space-md);
   }
 
-  .watermark {
-    font-size: 8rem;
-    right: -5%;
-  }
-
-  .gridBg {
-    background-size: 35px 35px;
-  }
-
-  .gradientOrb {
+  .watermarkNum {
     display: none;
   }
 
-  .scanLine {
-    display: none;
-  }
-
-  .horizRail {
-    display: none;
-  }
-
-  .cornerMarks {
-    display: none;
-  }
-
-  .vertLine {
-    display: none;
+  .card {
+    max-width: 100%;
   }
 
   .sectionTitle {

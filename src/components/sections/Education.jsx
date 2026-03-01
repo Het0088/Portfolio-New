@@ -75,7 +75,7 @@ export default function Education() {
 
   return (
     <section className={styles.education} ref={sectionRef} id="education">
-      <div className={styles.sectionNumber} aria-hidden="true">05</div>
+      <div className={styles.sectionNumber} aria-hidden="true">04</div>
       <p className={styles.label}>Background</p>
       <h2 className={styles.heading}>Education</h2>
 

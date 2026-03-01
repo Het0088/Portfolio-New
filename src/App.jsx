@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -16,23 +16,31 @@ import SkillSphere from './components/three/SkillSphere';
 
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
-import Services from './components/sections/Services';
 import Skills from './components/sections/Skills';
 import Education from './components/sections/Education';
 import Projects from './components/sections/Projects';
 import Achievements from './components/sections/Achievements';
 import GitHubStats from './components/sections/GitHubStats';
-import Testimonials from './components/sections/Testimonials';
-import FunFacts from './components/sections/FunFacts';
 import Contact from './components/sections/Contact';
 import Footer from './components/layout/Footer';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+function useIsMobile() {
+  const [mobile, setMobile] = useState(
+    typeof window !== 'undefined' && window.innerWidth < 768
+  );
+  useEffect(() => {
+    const handler = () => setMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handler);
+    return () => window.removeEventListener('resize', handler);
+  }, []);
+  return mobile;
+}
 
 export default function App() {
   const [preloaderDone, setPreloaderDone] = useState(false);
+  const isMobile = useIsMobile();
 
   return (
     <>
@@ -54,14 +62,11 @@ export default function App() {
         <main style={{ position: 'relative', zIndex: 2 }}>
           <Hero />
           <About />
-          <Services />
           <Skills />
           <Education />
           <Projects />
           <Achievements />
           <GitHubStats />
-          <Testimonials />
-          <FunFacts />
           <Contact />
           <Footer />
         </main>

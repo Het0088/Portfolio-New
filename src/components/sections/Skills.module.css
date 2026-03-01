@@ -3,6 +3,7 @@
   min-height: 100vh;
   padding: var(--space-xl) var(--space-lg);
   overflow: hidden;
+  text-align: center;
 }
 
 .sectionLabel {
@@ -14,12 +15,28 @@
   text-align: center;
 }
 
+.headerGlass {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  padding: var(--space-sm) var(--space-lg);
+  margin-bottom: var(--space-md);
+  border-radius: 16px;
+  background: rgba(10, 10, 20, 0.1);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .heading {
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
   font-weight: 800;
   text-align: center;
-  margin-bottom: var(--space-xl);
+  white-space: nowrap;
 }
 
 .headingAccent {
@@ -35,9 +52,9 @@
   margin: 0 auto;
   padding: var(--space-lg);
   border-radius: 24px;
-  background: rgba(10, 10, 20, 0.55);
-  backdrop-filter: blur(18px) saturate(1.2);
-  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  background: rgba(10, 10, 20, 0.3);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.04);
   box-shadow:
     0 8px 40px rgba(0, 0, 0, 0.25),
@@ -57,6 +74,7 @@
   border: 1px solid var(--color-border);
   will-change: transform, opacity;
   transition: border-color 0.3s;
+  text-align: left;
 }
 
 .category:hover {

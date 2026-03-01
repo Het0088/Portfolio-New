@@ -1,43 +1,37 @@
 .achievements {
   position: relative;
-  padding: var(--space-xl) var(--space-lg);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  padding: var(--space-xl) 0;
   overflow: hidden;
-  perspective: 1200px;
 }
 
-/* ---- Header area ---- */
 .headerArea {
   text-align: center;
-  margin-bottom: var(--space-lg);
+  padding: 0 var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 
 .label {
   font-size: clamp(0.7rem, 1vw, 0.85rem);
   text-transform: uppercase;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.3em;
   color: var(--color-muted);
   margin-bottom: var(--space-xs);
 }
 
 .heading {
   font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
   font-weight: 800;
-  margin-bottom: var(--space-xs);
+  margin-bottom: var(--space-sm);
 }
 
-.subtitle {
-  font-size: 0.95rem;
-  color: var(--color-muted);
-  margin-bottom: var(--space-md);
+.headingAccent {
+  background: linear-gradient(135deg, var(--color-accent), #00d4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* ---- Stats row ---- */
 .statsRow {
   display: flex;
   align-items: center;
@@ -54,180 +48,250 @@
 
 .statValue {
   font-family: var(--font-heading);
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 800;
-  color: var(--color-accent);
+  background: linear-gradient(135deg, var(--color-accent), #00d4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   line-height: 1;
 }
 
 .statLabel {
   font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   color: var(--color-muted);
 }
 
 .statDivider {
   width: 1px;
-  height: 36px;
-  background: rgba(255, 255, 255, 0.08);
+  height: 40px;
+  background: linear-gradient(180deg, transparent, rgba(108, 99, 255, 0.3), transparent);
 }
 
-/* ---- Grid ---- */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.marqueeContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   gap: 20px;
-  max-width: 1100px;
+}
+
+.marqueeEdgeLeft,
+.marqueeEdgeRight {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marqueeEdgeLeft {
+  left: 0;
+  background: linear-gradient(90deg, var(--color-bg), transparent);
+}
+
+.marqueeEdgeRight {
+  right: 0;
+  background: linear-gradient(270deg, var(--color-bg), transparent);
+}
+
+.marqueeTrack {
+  overflow: hidden;
   width: 100%;
 }
 
-/* ---- Card ---- */
+.marqueeSlide {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+}
+
+.slideLeft {
+  animation: marqueeLeft 45s linear infinite;
+}
+
+.slideRight {
+  animation: marqueeRight 50s linear infinite;
+}
+
+@keyframes marqueeLeft {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marqueeRight {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.marqueeSlide:hover {
+  animation-play-state: paused;
+}
+
 .certCard {
-  position: relative;
-  border-radius: 18px;
-  background: rgba(16, 16, 28, 0.65);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  flex: 0 0 320px;
+  height: 190px;
+  border-radius: 16px;
+  background: linear-gradient(165deg, rgba(20, 20, 38, 0.9), rgba(12, 12, 24, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.06);
   overflow: hidden;
+  position: relative;
   transition:
-    transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
     border-color 0.3s,
     box-shadow 0.4s;
 }
 
 .certCard:hover {
-  transform: translateY(-6px) scale(1.015);
-  border-color: color-mix(in srgb, var(--cert-color) 30%, transparent);
+  transform: translateY(-6px) scale(1.02);
+  border-color: color-mix(in srgb, var(--cert-color) 35%, transparent);
   box-shadow:
-    0 16px 48px rgba(0, 0, 0, 0.35),
-    0 0 0 1px color-mix(in srgb, var(--cert-color) 15%, transparent);
+    0 20px 50px rgba(0, 0, 0, 0.35),
+    0 0 60px -15px color-mix(in srgb, var(--cert-color) 12%, transparent);
 }
 
-/* Glow behind card on hover */
-.cardGlow {
+.cardShine {
   position: absolute;
-  top: -40%;
-  left: -20%;
-  width: 140%;
-  height: 140%;
-  background: radial-gradient(
-    ellipse at 50% 0%,
-    color-mix(in srgb, var(--cert-color) 12%, transparent),
-    transparent 70%
-  );
-  opacity: 0;
-  transition: opacity 0.5s;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(105deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.03) 40%,
+      rgba(255, 255, 255, 0.06) 50%,
+      rgba(255, 255, 255, 0.03) 60%,
+      transparent 80%);
+  transition: left 0.7s cubic-bezier(0.23, 1, 0.32, 1);
   pointer-events: none;
-  z-index: 0;
+  z-index: 2;
 }
 
-.certCard:hover .cardGlow {
-  opacity: 1;
+.certCard:hover .cardShine {
+  left: 130%;
 }
 
-/* Top accent gradient strip */
-.accentStrip {
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(
-    90deg,
-    var(--cert-color),
-    color-mix(in srgb, var(--cert-color) 40%, #6c63ff)
-  );
-  opacity: 0.6;
+.cardInner {
+  position: relative;
+  z-index: 1;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cardInner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cert-color), color-mix(in srgb, var(--cert-color) 50%, #6c63ff), transparent);
+  opacity: 0.5;
   transition: opacity 0.3s;
 }
 
-.certCard:hover .accentStrip {
+.certCard:hover .cardInner::before {
   opacity: 1;
-}
-
-/* Card content */
-.cardBody {
-  position: relative;
-  z-index: 1;
-  padding: var(--space-md) var(--space-md) var(--space-sm);
-  display: flex;
-  flex-direction: column;
-  min-height: 140px;
 }
 
 .cardTop {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--space-sm);
+  margin-bottom: 10px;
 }
 
-/* Issuer badge with icon */
 .issuerBadge {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   padding: 4px 10px 4px 6px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.certCard:hover .issuerBadge {
+  border-color: color-mix(in srgb, var(--cert-color) 25%, transparent);
+  background: color-mix(in srgb, var(--cert-color) 6%, transparent);
 }
 
 .issuerIcon {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   flex-shrink: 0;
 }
 
 .issuerName {
-  font-size: 0.7rem;
-  font-weight: 600;
+  font-size: 0.62rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   color: var(--cert-color);
 }
 
 .date {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   color: var(--color-muted);
-  opacity: 0.7;
-  white-space: nowrap;
+  opacity: 0.6;
+  padding: 2px 7px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .certTitle {
   font-family: var(--font-heading);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   line-height: 1.4;
-  margin-bottom: auto;
-  padding-bottom: var(--space-sm);
+  flex: 1;
+  transition: color 0.3s;
 }
 
-/* Footer: credential + verified */
+.certCard:hover .certTitle {
+  color: color-mix(in srgb, var(--cert-color) 60%, white);
+}
+
 .cardFooter {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: var(--space-xs);
+  padding-top: 8px;
   border-top: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .credentialId {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.55rem;
   color: var(--color-muted);
-  opacity: 0.45;
-  letter-spacing: 0.04em;
+  opacity: 0.35;
+  letter-spacing: 0.05em;
 }
 
 .verifiedTag {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 0.65rem;
-  font-weight: 600;
+  font-size: 0.6rem;
+  font-weight: 700;
   color: #50fa7b;
-  opacity: 0.7;
+  opacity: 0.6;
   transition: opacity 0.3s;
 }
 
@@ -240,7 +304,6 @@
   height: 14px;
 }
 
-/* ---- Section number watermark ---- */
 .sectionNumber {
   position: absolute;
   right: 4vw;
@@ -258,21 +321,28 @@
   z-index: 0;
 }
 
-/* ---- Responsive ---- */
-@media (max-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 767px) {
   .achievements {
-    padding: var(--space-lg) var(--space-md);
+    padding: var(--space-lg) 0;
   }
 
-  .grid {
-    grid-template-columns: 1fr;
+  .headerArea {
+    padding: 0 var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .certCard {
+    flex: 0 0 260px;
+    height: 175px;
+  }
+
+  .marqueeContainer {
     gap: 14px;
+  }
+
+  .marqueeEdgeLeft,
+  .marqueeEdgeRight {
+    width: 60px;
   }
 
   .statsRow {
@@ -280,11 +350,7 @@
   }
 
   .statValue {
-    font-size: 1.5rem;
-  }
-
-  .cardBody {
-    min-height: auto;
+    font-size: 1.6rem;
   }
 
   .sectionNumber {

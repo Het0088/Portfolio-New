@@ -91,17 +91,17 @@ export default function About() {
 
           <div className={styles.textBlock}>
             <p className={styles.bio}>
-              I'm Het Patel, a passionate developer from Vadodara, India, with expertise
-              in building Windows applications, web platforms, and database solutions.
-              I specialize in creating efficient, user-friendly software that bridges the
+              I'm Het Patel, a full-stack developer from Vadodara, India, with expertise
+              in building modern web applications and AI/ML-powered solutions.
+              I specialize in creating scalable, user-friendly platforms that bridge the
               gap between complex technology and intuitive design.
             </p>
           </div>
 
           <div className={styles.textBlock}>
             <p className={styles.bio}>
-              From AI-powered research tools and security monitoring systems to
-              interactive 3D experiences and full-stack platforms, I thrive on pushing
+              From AI-powered research tools and intelligent ML models to
+              interactive 3D experiences and full-stack web applications, I thrive on pushing
               the boundaries of what's possible in the browser and beyond.
             </p>
           </div>

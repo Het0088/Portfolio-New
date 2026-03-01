@@ -6,6 +6,10 @@ import * as THREE from 'three';
 const GRID = 60;
 const GAP = 0.16;
 
+const purple = new THREE.Color('#6c63ff');
+const cyan = new THREE.Color('#00d4ff');
+const tempColor = new THREE.Color();
+
 export default function MorphBlob() {
   const meshRef = useRef();
 
@@ -16,13 +20,11 @@ export default function MorphBlob() {
     const base = new Float32Array(count * 3);
 
     const half = (GRID - 1) * GAP * 0.5;
-    const purple = new THREE.Color('#6c63ff');
-    const cyan = new THREE.Color('#00d4ff');
 
     let i = 0;
     for (let row = 0; row < GRID; row++) {
-      for (let col_ = 0; col_ < GRID; col_++) {
-        const x = col_ * GAP - half;
+      for (let c = 0; c < GRID; c++) {
+        const x = c * GAP - half;
         const z = row * GAP - half;
 
         pos[i * 3] = x;
@@ -34,10 +36,10 @@ export default function MorphBlob() {
         base[i * 3 + 2] = z;
 
         const d = Math.sqrt(x * x + z * z) / (half * 1.4);
-        const c = new THREE.Color().lerpColors(purple, cyan, d);
-        col[i * 3] = c.r;
-        col[i * 3 + 1] = c.g;
-        col[i * 3 + 2] = c.b;
+        tempColor.lerpColors(purple, cyan, d);
+        col[i * 3] = tempColor.r;
+        col[i * 3 + 1] = tempColor.g;
+        col[i * 3 + 2] = tempColor.b;
 
         i++;
       }
@@ -46,6 +48,8 @@ export default function MorphBlob() {
     return { positions: pos, colors: col, basePositions: base };
   }, []);
 
+  const half = (GRID - 1) * GAP * 0.5;
+
   useFrame((state) => {
     if (!meshRef.current) return;
 
@@ -53,36 +57,28 @@ export default function MorphBlob() {
     const posArray = meshRef.current.geometry.attributes.position.array;
     const colArray = meshRef.current.geometry.attributes.color.array;
 
-    const half = (GRID - 1) * GAP * 0.5;
-    const purple = new THREE.Color('#6c63ff');
-    const cyan = new THREE.Color('#00d4ff');
+    const mx = mouseState.x * half;
+    const mz = -mouseState.y * half;
 
     for (let i = 0; i < GRID * GRID; i++) {
       const x = basePositions[i * 3];
       const z = basePositions[i * 3 + 2];
       const dist = Math.sqrt(x * x + z * z);
 
-      // Layer 1: concentric ripple
       const wave1 = Math.sin(dist * 2.5 - t * 1.8) * 0.12;
-
-      // Layer 2: diagonal cross-wave
       const wave2 = Math.sin((x + z) * 1.8 + t * 1.2) * 0.06;
 
-      // Layer 3: mouse-driven local ripple
-      const mx = mouseState.x * half;
-      const mz = -mouseState.y * half;
       const mDist = Math.sqrt((x - mx) ** 2 + (z - mz) ** 2);
       const wave3 = Math.sin(mDist * 3 - t * 2.5) * 0.08 * Math.max(0, 1 - mDist / 3);
 
       const y = wave1 + wave2 + wave3;
       posArray[i * 3 + 1] = y;
 
-      // Color interpolation based on Y height + distance
       const blend = Math.max(0, Math.min(1, (y + 0.2) / 0.4 + dist / (half * 1.4)));
-      const c = new THREE.Color().lerpColors(purple, cyan, blend);
-      colArray[i * 3] = c.r;
-      colArray[i * 3 + 1] = c.g;
-      colArray[i * 3 + 2] = c.b;
+      tempColor.lerpColors(purple, cyan, blend);
+      colArray[i * 3] = tempColor.r;
+      colArray[i * 3 + 1] = tempColor.g;
+      colArray[i * 3 + 2] = tempColor.b;
     }
 
     meshRef.current.geometry.attributes.position.needsUpdate = true;

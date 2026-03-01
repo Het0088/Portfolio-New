@@ -12,52 +12,27 @@ export default function Skills() {
   const sectionRef = useRef(null);
 
   useGSAP(() => {
-    const categories = gsap.utils.toArray(`.${styles.category}`);
-
     ScrollTrigger.create({
       trigger: sectionRef.current,
-      start: 'top center',
-      end: 'bottom center',
+      start: 'top top',
+      end: '+=180%',
+      scrub: 1.2,
+      pin: true,
       onUpdate: (self) => {
         scrollState.skillsProgress = self.progress;
-      },
-    });
-
-    // Staggered entrance for category cards
-    gsap.from(categories, {
-      y: 60,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.15,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top 70%',
-        toggleActions: 'play none none reverse',
-      },
-    });
-
-    // Heading reveal
-    gsap.from(`.${styles.heading}`, {
-      y: 40,
-      opacity: 0,
-      duration: 1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top 80%',
-        toggleActions: 'play none none reverse',
       },
     });
   }, { scope: sectionRef });
 
   return (
     <section className={styles.skills} ref={sectionRef} id="skills">
-      <div className={styles.sectionNumber} aria-hidden="true">04</div>
-      <p className={styles.sectionLabel}>Expertise</p>
-      <h2 className={styles.heading}>
-        Tools & <span className={styles.headingAccent}>Technologies</span>
-      </h2>
+      <div className={styles.sectionNumber} aria-hidden="true">03</div>
+      <div className={styles.headerGlass}>
+        <p className={styles.sectionLabel}>Expertise</p>
+        <h2 className={styles.heading}>
+          Tools & <span className={styles.headingAccent}>Technologies</span>
+        </h2>
+      </div>
       <div className={styles.glassWrap}>
         <div className={styles.grid}>
           {skillCategories.map((category) => (
