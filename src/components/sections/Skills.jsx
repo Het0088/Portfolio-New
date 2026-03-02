@@ -12,16 +12,45 @@ export default function Skills() {
   const sectionRef = useRef(null);
 
   useGSAP(() => {
-    ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: 'top top',
-      end: '+=180%',
-      scrub: 1.2,
-      pin: true,
-      onUpdate: (self) => {
-        scrollState.skillsProgress = self.progress;
+    const header = sectionRef.current.querySelector(`.${styles.headerGlass}`);
+    const glassWrap = sectionRef.current.querySelector(`.${styles.glassWrap}`);
+    const categories = gsap.utils.toArray(`.${styles.category}`);
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top top',
+        end: '+=180%',
+        scrub: 1.2,
+        pin: true,
+        onUpdate: (self) => {
+          scrollState.skillsProgress = self.progress;
+        },
       },
     });
+
+    tl.fromTo(header,
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.12 },
+      0
+    );
+
+    tl.fromTo(glassWrap,
+      { y: 40, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.15 },
+      0.05
+    );
+
+    categories.forEach((cat, i) => {
+      tl.fromTo(cat,
+        { y: 50, opacity: 0, scale: 0.9 },
+        { y: 0, opacity: 1, scale: 1, duration: 0.12 },
+        0.1 + i * 0.06
+      );
+    });
+
+    tl.to(header, { y: -30, opacity: 0, duration: 0.15 }, 0.8);
+    tl.to(glassWrap, { y: -40, opacity: 0, duration: 0.15 }, 0.82);
   }, { scope: sectionRef });
 
   return (
