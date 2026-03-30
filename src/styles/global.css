@@ -76,6 +76,22 @@ img {
 }
 
 @media (max-width: 767px) {
+  :root {
+    --space-lg: 2rem;
+    --space-xl: 4rem;
+  }
+
+  body, a, button {
+    cursor: auto;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+}
+
+@media (pointer: coarse) {
   body, a, button {
     cursor: auto;
   }

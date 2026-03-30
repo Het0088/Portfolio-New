@@ -20,38 +20,52 @@ export default function About() {
 
   useGSAP(() => {
     const blocks = gsap.utils.toArray(`.${styles.textBlock}`);
+    const mm = ScrollTrigger.matchMedia();
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top top',
-        end: '+=150%',
-        scrub: 1,
-        pin: true,
-        onUpdate: (self) => {
-          scrollState.aboutProgress = self.progress;
+    mm.add('(min-width: 768px)', () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: '+=150%',
+          scrub: 1,
+          pin: true,
+          onUpdate: (self) => {
+            scrollState.aboutProgress = self.progress;
+          },
         },
-      },
-    });
+      });
 
-    blocks.forEach((block, i) => {
+      blocks.forEach((block, i) => {
+        tl.fromTo(
+          block,
+          { y: 80, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.3 },
+          i * 0.12
+        );
+      });
+
       tl.fromTo(
-        block,
-        { y: 80, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.3 },
-        i * 0.12
+        `.${styles.visualColumn}`,
+        { y: 100 },
+        { y: -100, duration: 1 },
+        0
       );
     });
 
-    // Parallax on visual column
-    tl.fromTo(
-      `.${styles.visualColumn}`,
-      { y: 100 },
-      { y: -100, duration: 1 },
-      0
-    );
+    mm.add('(max-width: 767px)', () => {
+      blocks.forEach((block) => {
+        gsap.from(block, {
+          y: 40, opacity: 0, duration: 0.7, ease: 'power3.out',
+          scrollTrigger: {
+            trigger: block,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+        });
+      });
+    });
 
-    // Animated counters
     stats.forEach((stat, i) => {
       ScrollTrigger.create({
         trigger: sectionRef.current,

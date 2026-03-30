@@ -231,20 +231,37 @@
   .inner {
     flex-direction: column;
     width: 100%;
+    gap: var(--space-md);
   }
 
   .panel {
     width: 100%;
     height: auto;
     padding: var(--space-md);
+    flex-direction: column;
+    gap: var(--space-sm);
   }
 
-  .watermarkNum {
+  .panelLeft {
+    min-width: auto;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .bigNumber {
+    font-size: 3rem;
+  }
+
+  .accentLine {
     display: none;
   }
 
   .card {
     max-width: 100%;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(20, 20, 31, 0.85);
   }
 
   .sectionTitle {

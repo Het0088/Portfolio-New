@@ -17,8 +17,8 @@ export default function ThreeCanvas({ children }) {
     >
       <Canvas
         camera={{ position: [0, 0, 5], fov: 75 }}
-        dpr={[1, 2]}
-        gl={{ antialias: true, alpha: true }}
+        dpr={[1, 1.5]}
+        gl={{ antialias: false, alpha: true, powerPreference: 'high-performance' }}
         style={{ pointerEvents: 'none' }}
       >
         <Suspense fallback={null}>

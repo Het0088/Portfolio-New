@@ -534,6 +534,16 @@
 }
 
 @media (max-width: 767px) {
+  .hero {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: calc(var(--nav-height) + 1.5rem) 0 2rem;
+  }
+
   .bgNumber {
     display: none;
   }
@@ -543,17 +553,60 @@
   }
 
   .rightVisuals {
+    position: relative;
+    inset: auto;
+    display: block;
+    width: 100%;
+    padding: 0 var(--space-md);
+    margin-top: 1.5rem;
+  }
+
+  .textRing {
     display: none;
   }
 
+  .accents {
+    display: none;
+  }
+
+  .codeCard {
+    position: relative;
+    right: auto;
+    top: auto;
+    width: 100%;
+    pointer-events: auto;
+  }
+
+  .techChips {
+    position: relative;
+    right: auto;
+    top: auto;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 1rem;
+    padding: 0;
+  }
+
+  .techChip {
+    position: relative !important;
+    right: auto !important;
+    top: auto !important;
+    animation: none !important;
+  }
+
   .content {
-    bottom: 15vh;
-    left: var(--space-md);
-    max-width: 92vw;
+    position: relative;
+    bottom: auto;
+    left: auto;
+    max-width: 100%;
+    padding: 0 var(--space-md);
   }
 
   .name {
-    font-size: clamp(4rem, 18vw, 6rem);
+    font-size: clamp(3.5rem, 16vw, 5.5rem);
   }
 
   .meta {
@@ -562,8 +615,11 @@
   }
 
   .bottomBar {
-    left: 0;
-    right: 0;
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    margin-top: 2rem;
   }
 
   .actions {
@@ -573,5 +629,9 @@
   .ctaBtn {
     font-size: 0.78rem;
     padding: 0.75rem 1.5rem;
+  }
+
+  .scrollLine {
+    height: 32px;
   }
 }

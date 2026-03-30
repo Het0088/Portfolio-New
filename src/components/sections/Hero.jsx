@@ -95,64 +95,67 @@ export default function Hero() {
       ease: 'power1.inOut',
     });
 
-    // Scroll-away: pin then content drifts up
-    const scrollTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top top',
-        end: '+=65%',
-        scrub: 1.2,
-        pin: true,
-        onUpdate: (self) => {
-          scrollState.heroProgress = self.progress;
-        },
-      },
-    });
+    const mm = ScrollTrigger.matchMedia();
 
-    scrollTl
-      .fromTo(`.${styles.content}`, {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-      }, {
-        y: -160,
-        opacity: 0,
-        scale: 0.92,
-        duration: 0.6,
-        immediateRender: false,
-      }, 0.35)
-      .fromTo(bgNumber, {
-        opacity: 0.022,
-        scale: 1,
-      }, {
-        opacity: 0,
-        scale: 0.95,
-        duration: 0.6,
-        immediateRender: false,
-      }, 0.35)
-      .fromTo(bottomBar, {
-        opacity: 1,
-        y: 0,
-      }, {
-        opacity: 0,
-        y: 20,
-        duration: 0.5,
-        immediateRender: false,
-      }, 0.4)
-      .fromTo(cornerTag, {
-        opacity: 0.35,
-      }, {
-        opacity: 0,
-        duration: 0.5,
-        immediateRender: false,
-      }, 0.4)
-      .fromTo(rightVisuals, {
-        opacity: 1,
-      }, {
-        opacity: 0,
-        duration: 0.5,
-        immediateRender: false,
-      }, 0.4);
+    mm.add('(min-width: 768px)', () => {
+      const scrollTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          end: '+=65%',
+          scrub: 1.2,
+          pin: true,
+          onUpdate: (self) => {
+            scrollState.heroProgress = self.progress;
+          },
+        },
+      });
+
+      scrollTl
+        .fromTo(`.${styles.content}`, {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+        }, {
+          y: -160,
+          opacity: 0,
+          scale: 0.92,
+          duration: 0.6,
+          immediateRender: false,
+        }, 0.35)
+        .fromTo(bgNumber, {
+          opacity: 0.022,
+          scale: 1,
+        }, {
+          opacity: 0,
+          scale: 0.95,
+          duration: 0.6,
+          immediateRender: false,
+        }, 0.35)
+        .fromTo(bottomBar, {
+          opacity: 1,
+          y: 0,
+        }, {
+          opacity: 0,
+          y: 20,
+          duration: 0.5,
+          immediateRender: false,
+        }, 0.4)
+        .fromTo(cornerTag, {
+          opacity: 0.35,
+        }, {
+          opacity: 0,
+          duration: 0.5,
+          immediateRender: false,
+        }, 0.4)
+        .fromTo(rightVisuals, {
+          opacity: 1,
+        }, {
+          opacity: 0,
+          duration: 0.5,
+          immediateRender: false,
+        }, 0.4);
+    });
   }, { scope: containerRef });
 
   return (
