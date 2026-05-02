@@ -29,7 +29,7 @@ const educationList = [
   },
   {
     degree: 'Diploma in Computer Engineering',
-    institution: 'Government Polytechnic',
+    institution: 'Parul University, PIET (DS)',
     location: 'Vadodara, Gujarat',
     year: '3rd Year — 6th Semester (Completed)',
     spi: '8.90',
