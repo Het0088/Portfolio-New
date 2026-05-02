@@ -42,6 +42,19 @@
   animation: drift3 25s ease-in-out infinite;
 }
 
+.dotField {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.dot {
+  position: absolute;
+  border-radius: 50%;
+  background: #e0e8ff;
+  animation: twinkle ease-in-out infinite;
+}
+
 @keyframes drift1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
   33% { transform: translate(-30px, 40px) scale(1.08); }
@@ -57,4 +70,9 @@
   0%, 100% { transform: translate(0, 0); }
   40% { transform: translate(-25px, 20px); }
   80% { transform: translate(15px, -15px); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: var(--base-opacity, 0.25); transform: scale(1); }
+  50% { opacity: 0.05; transform: scale(0.6); }
 }
